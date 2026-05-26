@@ -362,7 +362,7 @@ namespace OP2MissionEditor
 				return false;
 
 			// Load map
-			using (ResourceManager resourceManager = new ResourceManager(UserPrefs.gameDirectory))
+			using (ArchiveResourceManager resourceManager = new ArchiveResourceManager(UserPrefs.gameDirectory))
 			{
 				using (Stream mapStream = resourceManager.GetResourceStream(missionRoot.levelDetails.mapName, true))
 				{

@@ -715,10 +715,15 @@ namespace OP2MissionEditor.Menu
 		// vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 		public void OnClick_RunOutpost2()
 		{
-			string path = Path.Combine(UserPrefs.gameDirectory, "Outpost2.exe");
+			// Outpost 2 1.4.1 / OPU ships a launcher at <gameDir>/OPU/OPULauncher.exe. Prefer it
+			// when present; fall back to the legacy <gameDir>/Outpost2.exe for pre-1.4.1 installs.
+			string opuLauncherPath = Path.Combine(UserPrefs.gameDirectory, "OPU", "OPULauncher.exe");
+			string legacyPath = Path.Combine(UserPrefs.gameDirectory, "Outpost2.exe");
+
+			string path = File.Exists(opuLauncherPath) ? opuLauncherPath : legacyPath;
 
 			System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(path);
-			startInfo.WorkingDirectory = UserPrefs.gameDirectory;
+			startInfo.WorkingDirectory = Path.GetDirectoryName(path);
 			System.Diagnostics.Process.Start(startInfo);
 		}
 

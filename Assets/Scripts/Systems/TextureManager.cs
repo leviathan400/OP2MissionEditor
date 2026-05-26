@@ -16,7 +16,7 @@ namespace OP2MissionEditor.Systems
 		private static Dictionary<string, Texture2D> m_MinimapTilesets = new Dictionary<string, Texture2D>();       // Key = Filename
 
 		private static string m_ArchiveDirectory;
-		private static ResourceManager m_ResourceManager;
+		private static ArchiveResourceManager m_ResourceManager;
 
 		public const int minimapScale = 4;
 
@@ -30,7 +30,7 @@ namespace OP2MissionEditor.Systems
 
 			m_ArchiveDirectory = UserPrefs.gameDirectory;
 			if (!string.IsNullOrEmpty(m_ArchiveDirectory))
-				m_ResourceManager = new ResourceManager(m_ArchiveDirectory);
+				m_ResourceManager = new ArchiveResourceManager(m_ArchiveDirectory);
 		}
 
 		private static void OnChangedPrefs()
@@ -39,9 +39,9 @@ namespace OP2MissionEditor.Systems
 				return;
 
 			// Set resource manager to new game directory
-			m_ResourceManager.Dispose();
+			m_ResourceManager?.Dispose();
 			m_ArchiveDirectory = UserPrefs.gameDirectory;
-			m_ResourceManager = new ResourceManager(m_ArchiveDirectory);
+			m_ResourceManager = new ArchiveResourceManager(m_ArchiveDirectory);
 		}
 
 		/// <summary>

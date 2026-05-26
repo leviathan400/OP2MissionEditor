@@ -1,4 +1,5 @@
 ﻿using OP2UtilityDotNet;
+using OP2MissionEditor.Systems;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -34,7 +35,7 @@ namespace OP2MissionEditor.Systems.TechTree
 
 			List<TechData> technologies = new List<TechData>();
 
-			using (ResourceManager resourceManager = new ResourceManager(archiveDirectory))
+			using (ArchiveResourceManager resourceManager = new ArchiveResourceManager(archiveDirectory))
 			{
 				using (Stream techSheet = resourceManager.GetResourceStream(techFileName, true))
 				{
